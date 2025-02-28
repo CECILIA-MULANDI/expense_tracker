@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-const userRoutes = require("../modules/users/users.routes");
+const userRoutes = require("./");
 const transactionsRoutes = require("../modules/transactions/transactions.routes");
 const errorHandler = require("../handlers/errorHandlers");
 
@@ -15,12 +15,6 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-// Serve frontend
-// app.use(express.static(path.join(__dirname, "../frontend")));
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend", "index.html"));
-// });
 
 // Database connection
 mongoose
@@ -33,8 +27,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionsRoutes);
 
 // Models
-require("../models/users.model");
-require("../models/transactions.model");
+
+require("./models/users.model");
+require("./models/transactions.model");
 
 // Handle 404
 app.all("*", (req, res) => {
