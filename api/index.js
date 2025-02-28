@@ -6,9 +6,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-const userRoutes = require("./modules/users/users.routes");
-const transactionsRoutes = require("./modules/transactions/transactions.routes");
-const errorHandler = require("./handlers/errorHandlers");
+const userRoutes = require("../modules/users/users.routes");
+const transactionsRoutes = require("../modules/transactions/transactions.routes");
+const errorHandler = require("../handlers/errorHandlers");
 
 const app = express();
 
@@ -28,8 +28,8 @@ app.use("/api/transactions", transactionsRoutes);
 
 // Models
 
-require("./models/users.model");
-require("./models/transactions.model");
+require("../models/users.model");
+require("../models/transactions.model");
 app.get("/", (req, res) => {
   res.send("Hi");
 });
