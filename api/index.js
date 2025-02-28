@@ -43,4 +43,3 @@ app.use(errorHandler);
 
 // Export as a serverless function
 module.exports = app;
-module.exports.handler = serverless(app);
