@@ -6,9 +6,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-const userRoutes = require("./");
-const transactionsRoutes = require("../modules/transactions/transactions.routes");
-const errorHandler = require("../handlers/errorHandlers");
+const userRoutes = require("./modules/users/users.routes");
+const transactionsRoutes = require("./modules/transactions/transactions.routes");
+const errorHandler = require("./handlers/errorHandlers");
 
 const app = express();
 
