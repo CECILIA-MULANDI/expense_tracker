@@ -30,7 +30,9 @@ app.use("/api/transactions", transactionsRoutes);
 
 require("./models/users.model");
 require("./models/transactions.model");
-
+app.get("/", (req, res) => {
+  res.send("Hi");
+});
 // Handle 404
 app.all("*", (req, res) => {
   res.status(404).json({ status: "Failed!", message: "Page Not Found!" });
