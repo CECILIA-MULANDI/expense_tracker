@@ -1,15 +1,14 @@
-require("express-async-errors");
-require("dotenv").config();
+// api/index.js
 const express = require("express");
-const serverless = require("serverless-http");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 
+// Import routes - adjust paths as needed
 const userRoutes = require("../modules/users/users.routes");
 const transactionsRoutes = require("../modules/transactions/transactions.routes");
 const errorHandler = require("../handlers/errorHandlers");
 
+// Create Express app
 const app = express();
 
 // Middleware
@@ -18,21 +17,23 @@ app.use(express.json());
 
 // Database connection
 mongoose
-  .connect(process.env.mongo_connection, {})
-  .then(() => console.log("Successfully connected to MongoDB!"))
-  .catch(() => console.log("Failed to connect to database"));
+  .connect(process.env.MONGODB_URI || process.env.mongo_connection, {})
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("Failed to connect to database", err));
+
+// Load models
+require("../models/users.model");
+require("../models/transactions.model");
 
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionsRoutes);
 
-// Models
-
-require("../models/users.model");
-require("../models/transactions.model");
+// Home route
 app.get("/", (req, res) => {
-  res.send("Hi");
+  res.send("API is running");
 });
+
 // Handle 404
 app.all("*", (req, res) => {
   res.status(404).json({ status: "Failed!", message: "Page Not Found!" });
@@ -41,5 +42,5 @@ app.all("*", (req, res) => {
 // Error Handler
 app.use(errorHandler);
 
-// Export as a serverless function
+// Export the Express API
 module.exports = app;
