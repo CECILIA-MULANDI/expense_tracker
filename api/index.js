@@ -44,3 +44,4 @@ app.use(errorHandler);
 
 // Export the Express API
 module.exports = app;
+module.exports = serverless(app);
