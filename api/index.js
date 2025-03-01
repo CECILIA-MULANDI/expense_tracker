@@ -42,6 +42,9 @@ app.all("*", (req, res) => {
 // Error Handler
 app.use(errorHandler);
 
+app.listen(8000, () => {
+  console.log("Server started successfully!");
+});
 // Export the Express API
 module.exports = app;
-module.exports = serverless(app);
+// module.exports = serverless(app);
